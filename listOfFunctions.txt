@@ -1,0 +1,23 @@
+Client   - main(args[]): takes user input, user ID and passes them to the frontend using a Scanner
+
+Frontend - main(args[]): handles creation of frontend server
+	   request(args): handles request at frontend, selects a random replica to pass request to, returns results
+	   getReplicas(): finds all bound replicas in the registry
+
+Replica  - main(args[]): handles creation of replica server, runs gossip() on an interval, uses Scanner to get user commands
+	   query(ts, args): passes query to database, returns results
+	   update(ts, args, client): passes update to backend, with boolean client indicating request source
+	   getLogs(): used in the case of a server being hard-reset, to 'replicate' another server
+	   status(): used to check server status
+	   makeGossip(newUpdates): sends gossip/updates to another server
+	   addReplica(i): used on startup for servers to populate their lists of replicas
+	   replicate(): used with getLogs() to replicate another server
+	   gossip(): selects a random server to gossip to, and calls makeGossip(newUpdates) if updates are available
+
+Database - searchMovie(title): searches db for movie by title
+	   getTitle(id): gets title from db by movie id
+	   getUserRating(userID, movieID): returns the last rating made by a user for the given movie id
+	   update(userID, movieID, rating): updates db with the new rating for the user, checking for previous ratings
+
+*ts - timestamp, args - arguments
+See source code for more in depth comments.
