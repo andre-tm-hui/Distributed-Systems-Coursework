@@ -1,3 +1,6 @@
+# Distributed Systems Coursework
+In this coursework, a virtual distributed system is made, where users can access, update and query a database, stored redundantly on multiple different servers/locations. These different servers then keep each other updated periodically.
+
 It is recommended that Windows is used for this program.
 
 Usage Instructions:
